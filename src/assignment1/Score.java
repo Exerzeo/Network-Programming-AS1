@@ -19,7 +19,7 @@ public class Score {
 	}
 	
 	public void minusScore(int score) {
-		this.score= this.score-score;
+		this.score-=score;
 	}
 	
 	public int showScore() {
