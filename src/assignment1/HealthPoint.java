@@ -24,9 +24,10 @@ public int showHP() {
 public boolean isHPZero() {
 	boolean outc=false;
 	
-	if (hp<0) {
+	if (hp<=0) {
 		outc=true;
 	}
+	
 	return outc;
 	
 }
