@@ -73,6 +73,8 @@ public boolean booleanResultRPS(int a,int b) {
 		outc=true;
 	}else if(a==2&b==3) {
 		outc=false;
+	}else if(a==b) {
+		System.out.println("!Result is not in boolean!");
 	}
 	return outc;
 }

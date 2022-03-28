@@ -33,4 +33,15 @@ public boolean isHPZero() {
 }
 
 
+public boolean isRoundDivisible(int a, int b) {
+	boolean outc=false;
+	
+	int divisible = a%b;
+	if (divisible == 0) {
+		outc = true;
+	}
+	return outc;
+}
+
+
 }
