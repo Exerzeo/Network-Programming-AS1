@@ -29,9 +29,15 @@ public class Client {
 				
 			while(true) {
 					
-				System.out.println(sessionName+"'S TURN!");
+				System.out.println("\n"+sessionName+"'S TURN!\n");
 				
-				System.out.println("Choose a number:");
+				int hp = fromServer.readInt();
+				int score = fromServer.readInt();
+				
+				System.out.println("HP: "+hp);
+				System.out.println("Score: "+score);
+				
+				System.out.println("\nChoose a number:");
 				System.out.println("1. Rock");
 				System.out.println("2. Paper");
 				System.out.println("3. Scissor\n");
@@ -45,8 +51,19 @@ public class Client {
 				
 				
 				System.out.print("Result: ");
-				String reslt=fromServer.readUTF();
-				System.out.println(reslt);
+				String result=fromServer.readUTF();
+				System.out.println(result);
+				
+				String infoRest=fromServer.readUTF();
+				System.out.print(infoRest);
+				
+				hp = fromServer.readInt();
+				
+				if (hp<=0) {
+					System.out.println(fromServer.readUTF());
+					System.out.println("Thank you for using the Rock Paper Scissor Client Side.");
+					break;
+				}
 				System.out.println("\nContinue? y/n");
 				String yn = s.next();
 				
@@ -81,6 +98,7 @@ public class Client {
 			if (fromServer !=null) {
 				fromServer.close();
 			}
+			s.close();
 			}catch(IOException e){
 				e.printStackTrace();
 			}
