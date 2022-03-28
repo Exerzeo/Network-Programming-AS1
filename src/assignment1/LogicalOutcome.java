@@ -61,6 +61,7 @@ public String resultRPS2(int a,int b) {
 }
 
 public boolean booleanResultRPS(int a,int b) {
+	
 	if(a==1&b==2) {
 		outc=false;
 	}else if(a==1&b==3) {
@@ -74,7 +75,7 @@ public boolean booleanResultRPS(int a,int b) {
 	}else if(a==2&b==3) {
 		outc=false;
 	}else if(a==b) {
-		System.out.println("!Result is not in boolean!");
+		System.out.println("Result is not in boolean!");
 	}
 	return outc;
 }

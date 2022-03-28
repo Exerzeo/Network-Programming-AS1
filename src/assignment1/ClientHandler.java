@@ -61,7 +61,7 @@ public class ClientHandler implements Runnable{
 				loop=fromClient.readBoolean();
 				loop2=fromClient2.readBoolean();
 				if (loop == false||loop2 == false) {
-					System.out.println("loop break;");
+					System.out.println("Thank you for playing Rock Paper Scissor Server side.");
 					break;
 				}
 			}
@@ -83,7 +83,7 @@ public class ClientHandler implements Runnable{
 			} catch (IOException e) {
 					e.printStackTrace();
 				}
-			System.out.println("Thank you for playing Rock Paper Scissor game.");
+			
 		
 		}
 		

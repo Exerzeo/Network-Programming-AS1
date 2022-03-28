@@ -26,7 +26,9 @@ public class Client {
 				System.out.println("Please enter your Username:");
 				sessionName=s.next();
 				toServer.writeUTF(sessionName);
-				while(true) {
+				
+			while(true) {
+					
 				System.out.println(sessionName+"'S TURN!");
 				
 				System.out.println("Choose a number:");
@@ -52,10 +54,12 @@ public class Client {
 					toServer.writeBoolean(true);
 				}else {
 					toServer.writeBoolean(false);
+					System.out.println("Thank you for using the Rock Paper Scissor Client Side.");
+					System.out.println("Exitting...");
 					break;
 				}
 				
-				}
+			}
 			
 		} catch (UnknownHostException e) {
 			
@@ -66,6 +70,7 @@ public class Client {
 			e.printStackTrace();
 			
 		}finally {
+			
 			try {
 			if(socket !=null) {
 				socket.close();
