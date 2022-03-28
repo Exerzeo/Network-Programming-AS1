@@ -57,10 +57,10 @@ public class Client {
 				String infoRest=fromServer.readUTF();
 				System.out.print(infoRest);
 				
-				hp = fromServer.readInt();
-				
-				if (hp<=0) {
-					System.out.println(fromServer.readUTF());
+				Boolean ending = fromServer.readBoolean();
+				if (ending==true) {
+					System.out.println("Current HP is less than 0");
+					System.out.println("Program ending..");
 					System.out.println("Thank you for using the Rock Paper Scissor Client Side.");
 					break;
 				}

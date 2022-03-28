@@ -27,7 +27,7 @@ public class ClientHandler implements Runnable{
 			toClient2 =new DataOutputStream(socket2.getOutputStream());
 			
 			String playerOne = "", playerTwo="";
-			boolean loop = true,loop2=true;
+			boolean loop = true,loop2=true,ending=false;
 			LogicalOutcome owl =new LogicalOutcome();
 			Rounds rounds = new Rounds();
 			HealthPoint health1 = new HealthPoint(),health2 = new HealthPoint();
@@ -62,7 +62,7 @@ public class ClientHandler implements Runnable{
 				toClient2.writeInt(scorePoint2);
 				
 				
-				System.out.println("\nGame Started. Round: "+numRounds+"\nWaiting for players to pick their options.");
+				System.out.println("\nGame Started. \nRound: "+numRounds+"\nWaiting for players to pick their options.");
 				
 				
 				int rpsChoice1 = fromClient.readInt();
@@ -85,48 +85,50 @@ public class ClientHandler implements Runnable{
 				
 				if (result1 == true) {
 					score1.addScore(100);
-					toClient.writeUTF("Score added 100");
+					toClient.writeUTF("Score added 100\n");
 				}else {
 					health1.minusHP(5);
-					toClient.writeUTF("HP -1");
+					toClient.writeUTF("HP -1\n");
 				}
 				
 				if (result2 ==true) {
 					score2.addScore(100);
-					toClient2.writeUTF("Score added 100");
+					toClient2.writeUTF("Score added 100\n");
 				}else {
 					health2.minusHP(5);
-					toClient2.writeUTF("HP -1");
+					toClient2.writeUTF("HP -1\n");
 				}
 				
-				toClient.writeInt(hp1);
-				toClient2.writeInt(hp2);
+				
 				
 				boolean ending1 = false,ending2 = false;
 				
 				ending1 = health1.isHPZero();
 				ending2 = health2.isHPZero();
 				
+				toClient.writeBoolean(ending1);
+				toClient2.writeBoolean(ending2);
+				
 				if (ending1 == true) {
 					System.out.println("\nThe hp of "+ sessionName+" has reached 0 :) gg");
-					System.out.println("\nFinal Result:");
+					System.out.println("\n[Final Result]");
 					System.out.println("Winner of game: "+sessionName2);
 					System.out.println("Total rounds played: "+numRounds);
 					System.out.println("Score of "+sessionName2+": "+score2.showScore());
 					
-					toClient.writeUTF("You lost. Your HP has reached 0");
+					toClient.writeUTF("\nYou lost. Your HP has reached 0");
 					
 					toClient2.writeUTF(sessionName+" HP's has reached 0 You Won!!!");
 					break;
 				}
 				if (ending2 == true) {
 					System.out.println("\nThe hp of "+ sessionName2+" has reached 0 :) gg");
-					System.out.println("\nFinal Result:");
+					System.out.println("\n[Final Result]");
 					System.out.println("Winner of game: "+sessionName);
 					System.out.println("Total rounds played: "+numRounds);
 					System.out.println("Score of "+sessionName+": "+score1.showScore());
 					
-					toClient2.writeUTF("You lost. Your HP has reached 0");
+					toClient2.writeUTF("\nYou lost. Your HP has reached 0");
 					
 					toClient.writeUTF(sessionName2+" HP's has reached 0 You Won!!!");
 					break;
