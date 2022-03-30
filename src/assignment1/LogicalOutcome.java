@@ -112,10 +112,6 @@ public boolean booleanResultRPS(int a,int b) {
 		
 		outc=false;
 		
-	}else if(a==b) {
-		
-		System.out.println("Result is not in boolean!");
-		
 	}
 	return outc;
 }

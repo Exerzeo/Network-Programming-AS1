@@ -13,10 +13,10 @@ public void setRewards(int a) {
 	rewards=a;
 }
 
-public void addWon(int a) {
+public void addWin(int a) {
 	win+=a;
 }
-public void addlost(int a) {
+public void addLose(int a) {
 	win+=a;
 }
 
@@ -29,7 +29,8 @@ public int intLose() {
 	return lose;
 }
 
-//a is the number of a and b is the number of targeted counts
+
+//a is the number of rounds won and b is the targeted counts
 public boolean isDivisible(int a, int b) {
 	boolean outc=false;
 	

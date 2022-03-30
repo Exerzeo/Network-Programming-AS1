@@ -53,11 +53,13 @@ public class Client {
 				System.out.print("Result: ");
 				String result=fromServer.readUTF();
 				System.out.println(result);
-				
+				if(result.equalsIgnoreCase("Draw")) {
+					System.out.println("Continue below to play again..");
+				}else {
 				String infoRest=fromServer.readUTF();
 				System.out.print(infoRest);
 				
-				Boolean ending = fromServer.readBoolean();
+				boolean ending = fromServer.readBoolean();
 				if (ending==true) {
 					System.out.println(fromServer.readUTF());
 					System.out.println("\nCurrent HP is less than 0");
@@ -72,6 +74,7 @@ public class Client {
 					System.out.println("\nThank you for using the Rock Paper Scissor Client Side.");
 					System.out.println("Exitting...");
 					break;
+				}
 				}
 				System.out.println("\nContinue? y/n");
 				String yn = s.next();

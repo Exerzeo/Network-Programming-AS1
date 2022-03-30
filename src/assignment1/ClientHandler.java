@@ -34,8 +34,13 @@ public class ClientHandler implements Runnable{
 			Score score1 = new Score(),score2 = new Score();
 			
 			
+				int defaultScore=100;
+			
 				health1.setHP(5);
 				health2.setHP(5);
+				
+				
+				
 				
 				String sessionName=fromClient.readUTF(),sessionName2=fromClient2.readUTF();
 				
@@ -83,23 +88,33 @@ public class ClientHandler implements Runnable{
 				boolean result1 = owl.booleanResultRPS(rpsChoice1, rpsChoice2);
 				boolean result2  = owl.booleanResultRPS(rpsChoice2, rpsChoice1);
 				
-				if (result1 == true) {
-					score1.addScore(100);
-					toClient.writeUTF("Score added 100\n");
+				
+				//this is for draw outcome
+				if(outcome1.equalsIgnoreCase("Draw")) {
+					
 				}else {
-					health1.minusHP(1);
+				
+				if (result1 == true) {
+					score1.addScore(defaultScore);
+					toClient.writeUTF("Score added "+defaultScore+"\n");
+					
+				}else {
+					health1.minusHP(5);
 					toClient.writeUTF("HP -1\n");
+					
 				}
 				
 				if (result2 ==true) {
-					score2.addScore(100);
-					toClient2.writeUTF("Score added 100\n");
+					score2.addScore(defaultScore);
+					toClient2.writeUTF("Score added "+defaultScore+"\n");
+					
 				}else {
-					health2.minusHP(1);
+					health2.minusHP(5);
 					toClient2.writeUTF("HP -1\n");
+					
 				}
 				
-				
+
 				
 				boolean ending1 = false,ending2 = false, programEnd=false;
 				
@@ -123,6 +138,7 @@ public class ClientHandler implements Runnable{
 					toClient2.writeBoolean(programEnd);
 					break;
 				}
+				
 				if (ending2 == true) {
 					System.out.println("\nThe hp of "+ sessionName2+" has reached 0 :) gg");
 					System.out.println("\n[Final Result]");
@@ -134,12 +150,12 @@ public class ClientHandler implements Runnable{
 					
 					toClient.writeUTF(sessionName2+" HP's has reached 0 You Won!!!\n");
 					programEnd=true;
-					toClient2.writeBoolean(programEnd);
+					toClient.writeBoolean(programEnd);
 					break;
 				}
 				toClient.writeBoolean(programEnd);
 				toClient2.writeBoolean(programEnd);
-				
+				}
 				String outcServer=owl.resultRPS1(rpsChoice1, rpsChoice2,sessionName,sessionName2);
 				System.out.println("\n"+sessionName+" vs "+sessionName2+"\nResult: "+outcServer);
 				
