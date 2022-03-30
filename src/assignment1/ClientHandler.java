@@ -87,7 +87,7 @@ public class ClientHandler implements Runnable{
 					score1.addScore(100);
 					toClient.writeUTF("Score added 100\n");
 				}else {
-					health1.minusHP(5);
+					health1.minusHP(1);
 					toClient.writeUTF("HP -1\n");
 				}
 				
@@ -95,13 +95,13 @@ public class ClientHandler implements Runnable{
 					score2.addScore(100);
 					toClient2.writeUTF("Score added 100\n");
 				}else {
-					health2.minusHP(5);
+					health2.minusHP(1);
 					toClient2.writeUTF("HP -1\n");
 				}
 				
 				
 				
-				boolean ending1 = false,ending2 = false;
+				boolean ending1 = false,ending2 = false, programEnd=false;
 				
 				ending1 = health1.isHPZero();
 				ending2 = health2.isHPZero();
@@ -118,7 +118,9 @@ public class ClientHandler implements Runnable{
 					
 					toClient.writeUTF("\nYou lost. Your HP has reached 0");
 					
-					toClient2.writeUTF(sessionName+" HP's has reached 0 You Won!!!");
+					toClient2.writeUTF(sessionName+" HP's has reached 0 You Won!!!\n");
+					programEnd=true;
+					toClient2.writeBoolean(programEnd);
 					break;
 				}
 				if (ending2 == true) {
@@ -130,10 +132,13 @@ public class ClientHandler implements Runnable{
 					
 					toClient2.writeUTF("\nYou lost. Your HP has reached 0");
 					
-					toClient.writeUTF(sessionName2+" HP's has reached 0 You Won!!!");
+					toClient.writeUTF(sessionName2+" HP's has reached 0 You Won!!!\n");
+					programEnd=true;
+					toClient2.writeBoolean(programEnd);
 					break;
 				}
-				
+				toClient.writeBoolean(programEnd);
+				toClient2.writeBoolean(programEnd);
 				
 				String outcServer=owl.resultRPS1(rpsChoice1, rpsChoice2,sessionName,sessionName2);
 				System.out.println("\n"+sessionName+" vs "+sessionName2+"\nResult: "+outcServer);

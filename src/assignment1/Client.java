@@ -59,9 +59,18 @@ public class Client {
 				
 				Boolean ending = fromServer.readBoolean();
 				if (ending==true) {
-					System.out.println("Current HP is less than 0");
-					System.out.println("Program ending..");
+					System.out.println(fromServer.readUTF());
+					System.out.println("\nCurrent HP is less than 0");
+					System.out.println("\nProgram ending..");
 					System.out.println("Thank you for using the Rock Paper Scissor Client Side.");
+					break;
+				}
+				boolean programEnd = fromServer.readBoolean();
+				if (programEnd = true) {
+					System.out.println("\nYou have won the game!!! Your opponent hp has reached 0.");
+					System.out.println("Program ending...");
+					System.out.println("\nThank you for using the Rock Paper Scissor Client Side.");
+					System.out.println("Exitting...");
 					break;
 				}
 				System.out.println("\nContinue? y/n");
