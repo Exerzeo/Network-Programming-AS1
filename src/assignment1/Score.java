@@ -33,7 +33,7 @@ public class Score {
 		return scoreGain;
 	}
 	public int scoreMultiplier(int a) {
-		int ans = scoreGain*a;
+		int ans = score*a;
 		return ans;
 	}
 	

@@ -16,6 +16,7 @@ public void setRewards(int a) {
 public void addWin(int a) {
 	win+=a;
 }
+
 public void addLose(int a) {
 	win+=a;
 }
@@ -24,6 +25,7 @@ public int intWin() {
 	
 	return win;
 }
+
 public int intLose() {
 	
 	return lose;

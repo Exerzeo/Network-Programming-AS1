@@ -14,9 +14,12 @@ public class Server {
 		DataInputStream fromClient=null;
 		DataOutputStream toClient =null;
 		try {
+			
 			serverSocket = new ServerSocket(12345);
+			
 			System.out.println("Welcome to Rock Paper Scissor server side!");
 			System.out.println("\nWaiting for clients to connect...");
+			
 			while(true) {
 				
 				

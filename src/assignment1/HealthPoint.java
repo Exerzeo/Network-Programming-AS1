@@ -1,6 +1,7 @@
 package assignment1;
 
 public class HealthPoint {
+	
 int hp;
 
 public HealthPoint() {}

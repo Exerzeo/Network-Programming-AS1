@@ -32,14 +32,13 @@ public class ClientHandler implements Runnable{
 			Rounds rounds = new Rounds();
 			HealthPoint health1 = new HealthPoint(),health2 = new HealthPoint();
 			Score score1 = new Score(),score2 = new Score();
+			ComboStreak comboStreak1 = new ComboStreak(),comboStreak2 = new ComboStreak();
 			
 			
 				int defaultScore=100;
 			
 				health1.setHP(5);
 				health2.setHP(5);
-				
-				
 				
 				
 				String sessionName=fromClient.readUTF(),sessionName2=fromClient2.readUTF();
@@ -97,24 +96,42 @@ public class ClientHandler implements Runnable{
 				if (result1 == true) {
 					score1.addScore(defaultScore);
 					toClient.writeUTF("Score added "+defaultScore+"\n");
+					comboStreak1.addWin(1);
 					
 				}else {
-					health1.minusHP(5);
+					health1.minusHP(1);
 					toClient.writeUTF("HP -1\n");
+					comboStreak1.addLose(1);
 					
 				}
 				
 				if (result2 ==true) {
 					score2.addScore(defaultScore);
 					toClient2.writeUTF("Score added "+defaultScore+"\n");
+					comboStreak2.addWin(1);
 					
 				}else {
-					health2.minusHP(5);
+					health2.minusHP(1);
 					toClient2.writeUTF("HP -1\n");
-					
+					comboStreak2.addLose(1);
 				}
 				
-
+				int winStreak1 = comboStreak1.intWin();
+				int winStreak2 = comboStreak2.intWin();
+				
+				boolean winStreakResult1 = comboStreak1.isDivisible(winStreak1, 3);
+				boolean winStreakResult2 = comboStreak2.isDivisible(winStreak2, 3);
+				
+				if (winStreakResult1 ==true) {
+					score1.scoreMultiplier(2);
+					System.out.println("Score multiplier applied on "+sessionName +" because win streak is 3. Score total x2");
+				}
+				if (winStreakResult2 ==true) {
+					score1.scoreMultiplier(2);
+					System.out.println("Score multiplier applied on "+sessionName2+" because win streak is 3. Score total x2");
+				}
+				
+				
 				
 				boolean ending1 = false,ending2 = false, programEnd=false;
 				
@@ -170,12 +187,15 @@ public class ClientHandler implements Runnable{
 					break;
 				}
 			}
+				
 				System.out.println("\nThank you for playing Rock Paper Scissor Server side.");
 				System.out.println("Input any key to end connection");
 				System.out.print(">");
+				
 				s.next();
 				
 		}catch (IOException e) {
+			
 			System.out.println("Error Occured!");
 			
 			
